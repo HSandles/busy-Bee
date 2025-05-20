@@ -31,6 +31,10 @@ commit_msg = random.choice(COMMIT_MESSAGES)
 subprocess.run(["git", "commit", "-m", commit_msg], check=True)
 
 # --- Git Push ---
-subprocess.run(["git", "push"], check=True)
+token = os.environ.get("GITHUB_TOKEN")
+repo = os.environ.get("GITHUB_REPOSITORY")  # username/repo
+subprocess.run([
+    "git", "push", f"https://x-access-token:{token}@github.com/{repo}.git"
+], check=True)
 
 print(f"✅ Committed with message: '{commit_msg}'")
