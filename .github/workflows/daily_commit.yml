@@ -30,21 +30,3 @@ jobs:
       - name: Run daily commit script
         run: python daily_commit.py
         working-directory: ${{ github.workspace }}
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add daily_commit.txt
-          git commit -m "$(shuf -n1 -e \
-            "Refactored for future-proofing" \
-            "Daily grind begins" \
-            "Added legacy support for dinosaurs" \
-            "Optimised coffee consumption" \
-            "Deleted 400 lines of bad code" \
-            "Moved a div, felt alive" \
-            "This one’s for the green square" \
-            "Refactored the refactor" \
-            "Commented out the chaos" \
-            "Ctrl+C, Ctrl+V excellence")"
-          git push
