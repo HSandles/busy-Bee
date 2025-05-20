@@ -2,9 +2,10 @@ name: Daily GitHub Commit
 
 on:
   schedule:
-    - cron: "0 11 * * *" # Runs every day at 12:00 UK time (11:00 UTC)
-  workflow_dispatch:
-  jobs:
+    - cron: "0 11 * * *" # Runs every day at 11:00 UTC = 12:00 BST
+  workflow_dispatch: # Allows you to trigger manually if needed
+
+jobs:
   auto-commit:
     runs-on: ubuntu-latest
 
@@ -16,6 +17,10 @@ on:
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
+
+      - name: List repo contents
+        run: ls -la
+        working-directory: ${{ github.workspace }}
 
       - name: Run daily commit script
         run: python daily_commit.py
